@@ -1,6 +1,5 @@
 
-import React, {useState, Fragment} from 'react';
-
+import React from 'react';
 
   function ClientData(props) {
     const cmdParams = Object.keys(props.data.commands).map((i) => {
