@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import Input from './input'
 import make_request from '../APIcall';
-
+import ClientData from './ClientData';
 
 
 export default class Landingpage extends React.Component {
@@ -76,28 +76,7 @@ export default class Landingpage extends React.Component {
     )
   }
 
-  renderClient() {
-    const cmdParams = Object.keys(this.state.data.commands).map((i) => {
-      let value = this.state.data.commands[i];
 
-      return (
-        <p key={i}>{value.name.toUpperCase()} : {JSON.stringify(value.parameters)}</p>
-      )
-    });
-
-    return (
-      <div>{Object.keys(this.state.data).map((key, i) => {
-        let value = this.state.data[key];
-
-        if (key === 'commands') {
-          value = cmdParams;
-        }
-        return (
-          <p key={i}><strong>{key.toUpperCase()}</strong> : {value}</p>
-        )
-      })}</div>
-    )
-  }
 
   render() {
     let msg = this.state.msg;
@@ -108,7 +87,7 @@ export default class Landingpage extends React.Component {
         </strong><br></br>
         <label>Enter a client ID you wish to view data for: </label>
         <Input onSubmit={this.getClientById}/>
-        {this.state.data && this.state.showData ? this.renderClient() : ''}
+        {this.state.data && this.state.showData ? <ClientData data={this.state.data}/> : ''}
         {this.state.data ? this.renderCommandForm() : ''}
         {this.state.data ? this.renderAddCommandBtn() : ''}
       </div>
