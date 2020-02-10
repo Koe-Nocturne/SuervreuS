@@ -1,18 +1,26 @@
 import React, {useState} from 'react';
-import CommandBtn from './commandbtn';
 import Parameter from './parameters';
 
 function CommandForm(props) {
   const [parameters, setParameters] = useState('');
+  const [name, setName] = useState('');
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    props.addCommand({name, parameters});
+  }
+ 
   return (
     <form>
       <p><strong>You can add commands for this client here</strong></p><br></br>
 
       <label>Command Name </label>
-      <input/><br></br>
+      <input 
+        onChange={e => setName(e.target.value)} 
+        value={name}
+      /><br></br>
       <Parameter addParameters={setParameters} params={parameters}/>
-      <button onClick={props.openform}>Add New Command</button>
+      <button onClick={e => handleClick(e)}>Add New Command</button>
     </form>
   )
 }

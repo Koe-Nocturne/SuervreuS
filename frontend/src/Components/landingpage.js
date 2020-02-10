@@ -42,6 +42,13 @@ export default class Landingpage extends React.Component {
     });
   }
 
+  addCommand = (obj) => {
+    let route = `/client/${this.state.data.id}}`;
+    let data = {...obj, id: this.state.data.id}
+    // make_request(route, this.handleSuccess, this.handleError, data , 'POST');
+    console.log(data);
+  }
+
   componentDidMount(prevProps, prevState) {
     make_request('/', this.msgSuccess, this.handleError)
   }
@@ -56,8 +63,7 @@ export default class Landingpage extends React.Component {
         <label>Enter a client ID you wish to view data for: </label>
         <Input onSubmit={this.getClientById}/>
         {this.state.data && this.state.showData ? <ClientData data={this.state.data}/> : ''}
-        {this.state.data ? <CommandForm openform={this.openCommandForm}/> : ''}
-        {/* {this.state.data ? this.renderAddCommandBtn() : ''} */}
+        {this.state.data ? <CommandForm addCommand={this.addCommand}/> : ''}
       </div>
     );
   }
