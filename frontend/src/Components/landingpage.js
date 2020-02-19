@@ -1,9 +1,10 @@
 import React from 'react';
 import '../App.css';
-import Input from './input'
+import Input from './UserIDInput'
 import make_request from '../APIcall';
-import ClientData from './clientdata';
-import CommandForm from './commandform';
+import ClientData from './ClientData';
+import CommandForm from './CommandForm';
+import FlashMessage from './FlashMessage';
 
 
 export default class Landingpage extends React.Component {
@@ -42,11 +43,14 @@ export default class Landingpage extends React.Component {
     });
   }
 
+  handleMessage = (result) => {
+    this.setState({cmdMsg: result.data});
+  }
+
   addCommand = (obj) => {
-    let route = `/client/${this.state.data.id}}`;
-    let data = {...obj, id: this.state.data.id}
-    // make_request(route, this.handleSuccess, this.handleError, data , 'POST');
-    console.log(data);
+    let route = `/client/${this.state.data.id}/command`;
+    make_request(route, this.msgSuccess, this.handleError, obj , 'POST');
+    console.log(obj);
   }
 
   componentDidMount(prevProps, prevState) {
@@ -54,15 +58,15 @@ export default class Landingpage extends React.Component {
   }
 
   render() {
-    let msg = this.state.msg;
     return (
       <div className="App">
         <strong>
-          <p>{!this.state.error ? msg : 'Something went wrong loading the page...'}</p>
+          <p>SuervreuS: an IoT microservice</p>
         </strong><br></br>
         <label>Enter a client ID you wish to view data for: </label>
         <Input onSubmit={this.getClientById}/>
         {this.state.data && this.state.showData ? <ClientData data={this.state.data}/> : ''}
+        <FlashMessage message={this.state.cmdMsg}/>
         {this.state.data ? <CommandForm addCommand={this.addCommand}/> : ''}
       </div>
     );

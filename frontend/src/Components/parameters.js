@@ -2,13 +2,12 @@ import React, {useState, Fragment} from 'react';
 
 function Parameters(props){
   const [parameter, setParameter] = useState('');
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('int');
 
   const handleClick = (event) => {
     event.preventDefault();
-    props.addParameters({ ...props.params, [parameter]: [value]})
+    props.addParameters({ ...props.params, [parameter]: value})
     setParameter('');
-    setValue('');
   };
 
     return (  
