@@ -49,8 +49,8 @@ export default class Landingpage extends React.Component {
 
   addCommand = (obj) => {
     let route = `/client/${this.state.data.id}/command`;
-    make_request(route, this.msgSuccess, this.handleError, obj , 'POST');
-    console.log(obj);
+    let data = {...obj};
+    make_request(route, this.handleMessage, this.handleError, data , 'POST');
   }
 
   componentDidMount(prevProps, prevState) {
