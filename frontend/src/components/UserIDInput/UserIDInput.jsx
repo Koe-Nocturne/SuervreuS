@@ -1,6 +1,6 @@
 import React, {useState, Fragment} from 'react';
 
-function Input(props) {
+function UserIDInput(props) {
   const [input, setInput] = useState('')
 
   return (
@@ -12,4 +12,4 @@ function Input(props) {
 
 }
 
-export default Input;
+export default UserIDInput;

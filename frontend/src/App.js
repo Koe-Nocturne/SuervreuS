@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './App.css';
-import Landingpage from './Components/LandingPage';
+import { LandingPage, LoginPage }from './components';
+
+import './App.css'
 
 class App extends React.Component {
 
   render() {
     return (
-      <Landingpage/>
+      <Fragment>
+      <header id="Header">
+        <p>SuervreuS: an IoT microservice </p>
+      </header>
+      <LoginPage/>
+       {/* <Landingpage/> */}
+      </Fragment>
     );
   }
 }

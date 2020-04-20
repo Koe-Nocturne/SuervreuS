@@ -1,10 +1,8 @@
 import React from 'react';
-import '../App.css';
-import Input from './UserIDInput'
-import make_request from '../APIcall';
-import ClientData from './ClientData';
-import CommandForm from './CommandForm';
-import FlashMessage from './FlashMessage';
+import '../../App.css';
+import {UserIDInput, ClientData, CommandForm, FlashMessage} from '../index';
+import make_request from '../../api/APIcall';
+
 
 
 export default class Landingpage extends React.Component {
@@ -49,7 +47,7 @@ export default class Landingpage extends React.Component {
 
   addCommand = (obj) => {
     let route = `/client/${this.state.data.id}/command`;
-    let data = {...obj};
+    let data = {data: {...obj}};
     make_request(route, this.handleMessage, this.handleError, data , 'POST');
   }
 
@@ -64,7 +62,7 @@ export default class Landingpage extends React.Component {
           <p>SuervreuS: an IoT microservice</p>
         </strong><br></br>
         <label>Enter a client ID you wish to view data for: </label>
-        <Input onSubmit={this.getClientById}/>
+        <UserIDInput onSubmit={this.getClientById}/>
         {this.state.data && this.state.showData ? <ClientData data={this.state.data}/> : ''}
         <FlashMessage message={this.state.cmdMsg}/>
         {this.state.data ? <CommandForm addCommand={this.addCommand}/> : ''}

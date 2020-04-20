@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Parameter from './Parameters';
+import Parameter from '../Parameters/Parameters';
 
 function CommandForm(props) {
   const [params, setParams] = useState('');
